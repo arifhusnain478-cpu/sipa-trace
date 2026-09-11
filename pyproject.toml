@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sipa-trace"
+version = "0.1.0"
+description = "Deterministic, diffable audit trail for AI infra pipelines"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+sipa-trace-verify = "sipa_trace.verify:main"
+
+[tool.setuptools]
+packages = ["sipa_trace"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

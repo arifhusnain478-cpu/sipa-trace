@@ -1,0 +1,7 @@
+# The core (sipa_trace/) has zero runtime dependencies.
+
+# Tests:
+pytest>=7
+
+# instrumentation/ will add real infra adapters (FastAPI middleware, MCP
+# server hook, LangChain callback) as those get built - see instrumentation/README.md
