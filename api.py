@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sipa_trace.card import TraceCard
 from sipa_trace.diff import diff_cards
+from sipa_trace.verify import verify as trace_verify
 
 app = FastAPI()
 
@@ -43,16 +44,9 @@ def get_diff():
 
 @app.get("/api/verify")
 def get_verify():
-    # Placeholder for sipa_trace.verify.verify() logic
-    cards = load_cards()
-    if not cards:
-        return {"valid": True, "card_count": 0}
-    
-    # Simple hash verification check
-    is_valid = True
-    for i in range(1, len(cards)):
-        if cards[i].prev_hash != cards[i-1].hash:
-            is_valid = False
-            break
-            
-    return {"valid": is_valid, "card_count": len(cards)}
+    result = trace_verify("trace.jsonl")
+    return {
+        "valid": result.ok, 
+        "card_count": result.count, 
+        "problems": result.problems
+    }
